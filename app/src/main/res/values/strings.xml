@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">EasyLife</string>
+
+    <!-- Welcome screen -->
+    <string name="welStc">Welcome on Easylife, Swipe up to continue</string>
+    <string name="upArrow">▲</string>
+
+
+    <!-- Login Screen -->
+    <string name="logStc">First at all, enter your logs or create an account</string>
+    <string name="logBtnTxt">Login</string>
+    <string name="crtAccBtnTxt">Create an account</string>
+    <string name="txtPseMail">Pseudo or Mail</string>
+
+    <string name="msgErrorPseMiss">No pseudo or Mail</string>
+    <string name="msgErrorPswMiss">No password</string>
+    <string name="msgErrorMail">Mail not valid</string>
+    <string name="msgErrorPsw">Password not valid</string>
+    <string name="msgErrorPse">Pse not valid</string>
+
+
+    <!-- Account creation screen -->
+    <string name="titleCrt">Account Creation</string>
+    <string name="txtPse">Pseudo</string>
+    <string name="txtPsw">Password</string>
+    <string name="txtMail">E-Mail</string>
+    <string name="txtConf">Confirmation</string>
+    <string name="txtCrtAcc">Enter your information</string>
+    <string name="txtCrtion">Creation</string>
+
+
+    <!-- Category selection screen -->
+    <string name="titleSel">Category selection</string>
+
+    <string name="disc">Disconnection</string>
+    <string name="fav">★</string>
+
+    <string name="txtResto">Restaurant</string>
+    <string name="txtUniv">University</string>
+    <string name="txtShop">Shops</string>
+    <string name="txtPnB">Pubs and Bars</string>
+</resources>
