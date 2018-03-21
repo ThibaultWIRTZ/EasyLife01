@@ -29,15 +29,22 @@ public class Selcatscr extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.action_disc:
                 Intent intent = new Intent(this, Logscr.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.action_fav:
+                Intent intent01 = new Intent(this, Favscr.class);
+                startActivity(intent01);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public void onClickBaseCat(View view) {

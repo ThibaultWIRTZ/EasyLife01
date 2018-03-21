@@ -53,5 +53,14 @@
                 android:value=".Selcatscr"/>
         </activity>
 
+        <activity
+            android:name=".Favscr"
+            android:label="Favourites"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr" />
+        </activity>
+
     </application>
 </manifest>
