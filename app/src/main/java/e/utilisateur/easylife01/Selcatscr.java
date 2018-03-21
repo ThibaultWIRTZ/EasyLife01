@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * Created by Thibault WIRTZ on 13/03/2018.
@@ -16,7 +17,7 @@ public class Selcatscr extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selcat);
+        setContentView(R.layout.activity_selcatscr);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
     }
 
@@ -37,5 +38,15 @@ public class Selcatscr extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickBaseCat(View view) {
+        Intent intent = new Intent(this, Periscr.class);
+        startActivity(intent);
+    }
+
+    public void onClickUniv(View view) {
+        Intent intent = new Intent(this, Roomscr.class);
+        startActivity(intent);
     }
 }

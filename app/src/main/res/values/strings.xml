@@ -39,4 +39,14 @@
     <string name="txtUniv">University</string>
     <string name="txtShop">Shops</string>
     <string name="txtPnB">Pubs and Bars</string>
+
+    <!-- Room selector -->
+    <string name="txtRoom">Select a building or enter a room</string>
+    <string name="txtBuil">Building</string>
+    <string name="txtRm">Room</string>
+
+
+    <!-- General strings -->
+    <string name="txtFind">Find</string>
+
 </resources>

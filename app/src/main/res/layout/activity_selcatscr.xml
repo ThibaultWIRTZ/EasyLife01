@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:theme="@style/SelCatTheme">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -35,6 +33,7 @@
             android:id="@+id/button14"
             android:layout_width="182dp"
             android:layout_height="234dp"
+            android:onClick="onClickBaseCat"
             android:text="@string/txtResto" />
 
         <Button
@@ -43,6 +42,7 @@
             android:layout_height="234dp"
             android:layout_column="1"
             android:layout_row="0"
+            android:onClick="onClickUniv"
             android:text="@string/txtUniv" />
 
         <Button
@@ -51,6 +51,7 @@
             android:layout_height="234dp"
             android:layout_column="0"
             android:layout_row="1"
+            android:onClick="onClickBaseCat"
             android:text="@string/txtShop" />
 
         <Button
@@ -59,6 +60,7 @@
             android:layout_height="234dp"
             android:layout_column="1"
             android:layout_row="1"
+            android:onClick="onClickBaseCat"
             android:text="@string/txtPnB" />
     </GridLayout>
 

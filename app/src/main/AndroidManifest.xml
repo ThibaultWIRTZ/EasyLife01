@@ -34,6 +34,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Logscr"/>
         </activity>
+        
+        <activity
+            android:name=".Periscr"
+            android:label="Perimeter chooser"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr"/>
+        </activity>
+
+        <activity
+            android:name=".Roomscr"
+            android:label="University place"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr"/>
+        </activity>
 
     </application>
 </manifest>
