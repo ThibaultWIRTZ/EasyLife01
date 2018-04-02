@@ -12,7 +12,9 @@ import android.view.View;
  * Created by Thibault WIRTZ on 13/03/2018.
  */
 
+
 public class Selcatscr extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +49,37 @@ public class Selcatscr extends AppCompatActivity {
         }
     }
 
-    public void onClickBaseCat(View view) {
+    /*public void onClickBaseCat(View view) {
         Intent intent = new Intent(this, Periscr.class);
+        startActivity(intent);
+    }*/
+
+    public void onClickUniv(View view) {
+        int choice = 1;
+        Intent intent = new Intent(this, Roomscr.class);
+        intent.putExtra("choice", choice);
         startActivity(intent);
     }
 
-    public void onClickUniv(View view) {
-        Intent intent = new Intent(this, Roomscr.class);
+    public void onClickResto(View view) {
+        int choice = 2;
+        Intent intent = new Intent(this, Periscr.class);
+        intent.putExtra("choice", choice);
         startActivity(intent);
     }
+
+    public void onClickPubBar(View view) {
+        int choice = 3;
+        Intent intent = new Intent(this, Periscr.class);
+        intent.putExtra("choice", choice);
+        startActivity(intent);
+    }
+
+    public void onClickShop(View view) {
+        int choice = 4;
+        Intent intent = new Intent(this, Periscr.class);
+        intent.putExtra("choice", choice);
+        startActivity(intent);
+    }
+
 }

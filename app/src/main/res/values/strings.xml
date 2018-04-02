@@ -47,7 +47,8 @@
 
     <!-- General strings -->
     <string name="txtFind">Find</string>
-    <string name="txtDc">Dont care</string>
+    <string name="txtDc">I dont mind</string>
+    <string name="txterror">Please enter a perimeter or choose the option I dont mind.</string>
     <string name="txtCtn">Continue</string>
 
 </resources>
