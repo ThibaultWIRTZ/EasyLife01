@@ -43,27 +43,23 @@ public class Periscr extends AppCompatActivity {
 
     public void onClickContinue(View view){
 
-        if(edtPeri.getText().toString() == "" && !(findViewById(R.id.edtPeri).isEnabled()))
+        if(edtPeri.getText().toString().equals("") && (findViewById(R.id.edtPeri).isEnabled()))
         {
             findViewById(R.id.txterror).setVisibility(View.VISIBLE);
         }
+        else {
 
-        if(choice == 2)
-        {
-            Intent intent = new Intent(this, Typefood.class);
-            startActivity(intent);
+            if (choice == 2) {
+                Intent intent = new Intent(this, Typefood.class);
+                startActivity(intent);
+            } else if (choice == 3) {
+                Intent intent = new Intent(this, CrtAccscr.class);
+                startActivity(intent);
+            } else if (choice == 4) {
+                Intent intent = new Intent(this, CrtAccscr.class);
+                startActivity(intent);
+            }
         }
-        else if(choice == 3)
-        {
-            Intent intent = new Intent(this, CrtAccscr.class);
-            startActivity(intent);
-        }
-        else if(choice == 4)
-        {
-            Intent intent = new Intent(this, CrtAccscr.class);
-            startActivity(intent);
-        }
-
     }
 
 
