@@ -47,7 +47,7 @@
             tools:layout_editor_absoluteX="0dp">
 
             <Button
-                android:id="@+id/button15"
+                android:id="@+id/btnUniv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="1"
@@ -68,7 +68,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/button14"
+                android:id="@+id/btnRest"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
@@ -100,7 +100,7 @@
             tools:layout_editor_absoluteX="0dp">
 
             <Button
-                android:id="@+id/button17"
+                android:id="@+id/btnPnB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="1"
@@ -121,7 +121,7 @@
                 app:layout_constraintVertical_bias="0.974" />
 
             <Button
-                android:id="@+id/button16"
+                android:id="@+id/btnShops"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="0"

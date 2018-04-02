@@ -7,6 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by Thibault WIRTZ on 13/03/2018.
@@ -19,6 +23,13 @@ public class Selcatscr extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selcatscr);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        String user = (String)getIntent().getSerializableExtra("usr");
+
+        if(user != null){
+            Toast.makeText(Selcatscr.this, "Welcome to you " + user,
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
