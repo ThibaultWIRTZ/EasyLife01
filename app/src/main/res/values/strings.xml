@@ -48,5 +48,7 @@
 
     <!-- General strings -->
     <string name="txtFind">Find</string>
+    <string name="txtDc">Don't care</string>
+    <string name="txtCtn">Continue</string>
 
 </resources>
