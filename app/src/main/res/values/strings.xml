@@ -10,9 +10,9 @@
     <string name="logStc">First at all, enter your logs or create an account</string>
     <string name="logBtnTxt">Login</string>
     <string name="crtAccBtnTxt">Create an account</string>
-    <string name="txtPseMail">Pseudo or Mail</string>
+    <string name="txtPseMail">Mail</string>
 
-    <string name="msgErrorPseMiss">No pseudo or Mail</string>
+    <string name="msgErrorPseMiss">No Mail</string>
     <string name="msgErrorPswMiss">No password</string>
     <string name="msgErrorMail">Mail not valid</string>
     <string name="msgErrorPsw">Password not valid</string>
@@ -21,7 +21,6 @@
 
     <!-- Account creation screen -->
     <string name="titleCrt">Account Creation</string>
-    <string name="txtPse">Pseudo</string>
     <string name="txtPsw">Password</string>
     <string name="txtMail">E-Mail</string>
     <string name="txtConf">Confirmation</string>
@@ -48,7 +47,7 @@
 
     <!-- General strings -->
     <string name="txtFind">Find</string>
-    <string name="txtDc">Don't care</string>
+    <string name="txtDc">Dont care</string>
     <string name="txtCtn">Continue</string>
 
 </resources>
