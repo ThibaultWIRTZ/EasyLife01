@@ -8,17 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 /**
  * Created by Utilisateur on 21/03/2018.
  */
 
 public class Roomscr extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roomscr);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         findViewById(R.id.spiBuild).setEnabled(false);
+
+        mAuth = FirebaseAuth.getInstance();
 
         ActionBar ab = getSupportActionBar();
         if(ab != null) {
