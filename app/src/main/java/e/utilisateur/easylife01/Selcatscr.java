@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Selcatscr extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+    private int dispNameCtr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,25 @@ public class Selcatscr extends AppCompatActivity {
         setContentView(R.layout.activity_selcatscr);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        String user = (String)getIntent().getSerializableExtra("usr");
+        mAuth = FirebaseAuth.getInstance();
 
-        if(user != null){
-            Toast.makeText(Selcatscr.this, "Welcome to you " + user,
-                    Toast.LENGTH_SHORT).show();
+        if (savedInstanceState != null){
+            dispNameCtr = savedInstanceState.getInt("dispNameCtr");
         }
+
+        //Display only once when created
+        if(dispNameCtr < 1){
+            Toast.makeText(Selcatscr.this, "Welcome to you " + mAuth.getCurrentUser().getEmail(),
+                    Toast.LENGTH_SHORT).show();
+            dispNameCtr ++;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putInt("dispNameCtr", dispNameCtr);
     }
 
     @Override
