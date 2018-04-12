@@ -1,5 +1,6 @@
 package e.utilisateur.easylife01;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,11 +31,17 @@ public class Selcatscr extends AppCompatActivity {
     private String name;
     private FirebaseUser user;
 
+    private ProgressDialog mProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selcatscr);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        mProgress = new ProgressDialog(this);
+        mProgress.setMessage("Loading information...");
+        mProgress.show();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -42,11 +49,13 @@ public class Selcatscr extends AppCompatActivity {
 
         user = mAuth.getCurrentUser();
 
+
         mDataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String v = dataSnapshot.child(user.getUid()).child("Name").getValue(String.class);
                 setTitle(v);
+                mProgress.dismiss();
             }
 
             @Override

@@ -51,4 +51,8 @@
     <string name="txterror">Please enter a perimeter or choose the option I dont mind.</string>
     <string name="txtCtn">Continue</string>
 
+    <string-array name="spiBulidList">
+
+    </string-array>
+
 </resources>

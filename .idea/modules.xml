@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyLife01.iml" filepath="$PROJECT_DIR$/EasyLife01.iml" />
-      <module fileurl="file://C:\Users\esthe\AndroidStudioProjects\EasyLife01\EasyLife01.iml" filepath="C:\Users\esthe\AndroidStudioProjects\EasyLife01\EasyLife01.iml" />
-      <module fileurl="file://C:\Users\Utilisateur\AndroidStudioProjects\EasyLife01\.idea\EasyLife01.iml" filepath="C:\Users\Utilisateur\AndroidStudioProjects\EasyLife01\.idea\EasyLife01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/EasyLife01.iml" filepath="$PROJECT_DIR$/.idea/EasyLife01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../esthe/AndroidStudioProjects/EasyLife01/EasyLife01.iml" filepath="$PROJECT_DIR$/../../../esthe/AndroidStudioProjects/EasyLife01/EasyLife01.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

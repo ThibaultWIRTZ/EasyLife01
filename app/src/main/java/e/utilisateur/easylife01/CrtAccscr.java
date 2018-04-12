@@ -1,5 +1,6 @@
 package e.utilisateur.easylife01;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +28,7 @@ public class CrtAccscr extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText edtEmail,edtPsw,edtName;
+    private ProgressDialog mProgress;
 
     //DataBase
     private FirebaseDatabase db;
@@ -46,6 +47,7 @@ public class CrtAccscr extends AppCompatActivity {
         edtName = findViewById(R.id.edtName);
 
         mAuth = FirebaseAuth.getInstance();
+        mProgress = new ProgressDialog(this);
 
         //Get Users reference in database
         db=FirebaseDatabase.getInstance();
@@ -64,6 +66,10 @@ public class CrtAccscr extends AppCompatActivity {
         String email = edtEmail.getText().toString().trim();
 
         if(!email.matches("") && !psw.matches("") && !name.matches("")) {
+
+            mProgress.setMessage("Signing up...");
+            mProgress.show();
+
             mAuth.createUserWithEmailAndPassword(email, psw)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -81,11 +87,15 @@ public class CrtAccscr extends AppCompatActivity {
 
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
+
+                                mProgress.dismiss();
+
                                 createSelCat();
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                mProgress.dismiss();
                                 Toast.makeText(CrtAccscr.this, "Creation failed.",
                                         Toast.LENGTH_SHORT).show();
                             }
