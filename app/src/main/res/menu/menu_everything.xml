@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_Univ"
+        android:title="@string/txtUniv"
+        />
+    <item
+        android:id="@+id/action_Rest"
+        android:title="@string/txtResto"
+        />
+    <item
+        android:id="@+id/action_PnB"
+        android:title="@string/txtPnB"
+        />
+    <item
+        android:id="@+id/action_Shops"
+        android:title="@string/txtShop"
+        />
+</menu>

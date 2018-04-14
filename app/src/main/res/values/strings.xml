@@ -7,7 +7,7 @@
 
 
     <!-- Login Screen -->
-    <string name="logStc">First at all, enter your logs or create an account</string>
+    <string name="logStc">First of all, enter your logs or create an account</string>
     <string name="logBtnTxt">Login</string>
     <string name="crtAccBtnTxt">Create an account</string>
     <string name="txtPseMail">Mail</string>
@@ -32,12 +32,18 @@
     <string name="titleSel">Category selection</string>
 
     <string name="disc">Disconnection</string>
-    <string name="fav">★</string>
+    <string name="addRequest">Add request</string>
+    <string name="feedback">Send feedback</string>
+    <string name="watchfeedbacks">Watch feedbacks</string>
+    <string name="watchRequests">Watch requests</string>
+    <string name="addPlace">Add a place</string>
+    <string name="favAccess">Favourites</string>
 
-    <string name="txtResto">Restaurant</string>
+    <string name="txtResto">Restaurants</string>
     <string name="txtUniv">University</string>
     <string name="txtShop">Shops</string>
     <string name="txtPnB">Pubs and Bars</string>
+
 
     <!-- Room selector -->
     <string name="txtRoom">Select a building or enter a room</string>
@@ -50,9 +56,7 @@
     <string name="txtDc">I dont mind</string>
     <string name="txterror">Please enter a perimeter or choose the option I dont mind.</string>
     <string name="txtCtn">Continue</string>
-
-    <string-array name="spiBulidList">
-
-    </string-array>
+    <string name="notFav">☆</string>
+    <string name="inFav">★</string>
 
 </resources>

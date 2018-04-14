@@ -53,11 +53,12 @@ public class Roomscr extends AppCompatActivity {
         }
 
         // Read buildings from University
-        mDataBase.child("University").addValueEventListener(new ValueEventListener() {
+        mDataBase.child("Places").child("University").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+                mDataBase.child("Restaurants").removeValue();
                 final List<String> buildings = new ArrayList<String>();
 
                 //Go through the table University
@@ -90,6 +91,6 @@ public class Roomscr extends AppCompatActivity {
     }
 
     public void onClickFindRoom(View view) {
-        
+
     }
 }

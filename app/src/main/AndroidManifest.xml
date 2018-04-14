@@ -62,5 +62,30 @@
                 android:value=".Selcatscr" />
         </activity>
 
+        <activity
+            android:name=".Everythingscr"
+            android:label="Every places"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr"/>
+        </activity>
+
+        <activity android:name=".Feedbackscr"
+            android:label="Feedback"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr"/>
+        </activity>
+
+        <activity android:name=".Detailsscr"
+            android:label="Details"
+            android:parentActivityName=".Everythingscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Everythingscr"/>
+        </activity>
+
     </application>
 </manifest>

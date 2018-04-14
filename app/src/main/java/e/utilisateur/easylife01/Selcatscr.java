@@ -30,6 +30,7 @@ public class Selcatscr extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private String name;
     private FirebaseUser user;
+    private boolean admin;
 
     private ProgressDialog mProgress;
 
@@ -49,13 +50,20 @@ public class Selcatscr extends AppCompatActivity {
 
         user = mAuth.getCurrentUser();
 
-
-        mDataBase.addValueEventListener(new ValueEventListener() {
+        //Test if is admin and set Title
+        mDataBase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String v = dataSnapshot.child(user.getUid()).child("Name").getValue(String.class);
+                String v = dataSnapshot.child("Name").getValue(String.class);
                 setTitle(v);
                 mProgress.dismiss();
+                String s = dataSnapshot.child("isAdmin").getValue(String.class);
+                if (s.equals("yes")){
+                    admin=true;
+                }
+                else{
+                    admin=false;
+                }
             }
 
             @Override
@@ -68,27 +76,63 @@ public class Selcatscr extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu_main; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_cat, menu);
+
+        if(admin==true){
+            getMenuInflater().inflate(R.menu.menu_admincat, menu);
+        }
+        else{
+            getMenuInflater().inflate(R.menu.menu_cat, menu);
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.action_disc:
-                Intent intent = new Intent(this, Logscr.class);
-                startActivity(intent);
-                return true;
+        if(admin==true){
+            switch (id) {
+                case R.id.action_disc:
+                    Intent intent = new Intent(this, Logscr.class);
+                    startActivity(intent);
+                    return true;
 
-            case R.id.action_fav:
-                Intent intent01 = new Intent(this, Favscr.class);
-                startActivity(intent01);
-                return true;
+                case R.id.action_fav:
+                    Intent intent01 = new Intent(this, Favscr.class);
+                    startActivity(intent01);
+                    return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
+                case R.id.action_watchfeedbacks:
+                    Intent intent02 = new Intent(this,Feedbackscr.class);
+                    startActivity(intent02);
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
+        else{
+            switch (id) {
+                case R.id.action_disc:
+                    Intent intent = new Intent(this, Logscr.class);
+                    startActivity(intent);
+                    return true;
+
+                case R.id.action_fav:
+                    Intent intent01 = new Intent(this, Favscr.class);
+                    startActivity(intent01);
+                    return true;
+
+                case R.id.action_feedback:
+                    Intent intent02 = new Intent(this,Feedbackscr.class);
+                    startActivity(intent02);
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }
+
+
     }
 
     /*public void onClickBaseCat(View view) {
@@ -124,4 +168,8 @@ public class Selcatscr extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onEverythingClicked(View view) {
+        Intent intent = new Intent(this,Everythingscr.class);
+        startActivity(intent);
+    }
 }

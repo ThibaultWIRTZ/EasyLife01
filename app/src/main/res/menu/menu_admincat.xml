@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_watchfeedbacks"
+        android:title="@string/watchfeedbacks"/>
+
+    <item
+        android:id="@+id/action_watchrequest"
+        android:title="@string/watchRequests"/>
+
+    <item
+        android:id="@+id/action_request"
+        android:title="@string/addPlace"
+        />
+
+    <item
+        android:id="@+id/action_disc"
+        android:title="@string/disc" />
+
+    <item
+        android:id="@+id/action_fav"
+        android:title="@string/fav"
+        app:showAsAction="always" />
+</menu>
