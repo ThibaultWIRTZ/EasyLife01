@@ -92,6 +92,7 @@ public class Selcatscr extends AppCompatActivity {
         if(admin==true){
             switch (id) {
                 case R.id.action_disc:
+                    mAuth.signOut();
                     Intent intent = new Intent(this, Logscr.class);
                     startActivity(intent);
                     return true;

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,8 +23,9 @@ public class Detailsscr extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String curID, curItem, curCat, curType;
     private boolean b = false;
-    private TextView lblDescr, lblTitlePlace;
+    private TextView lblDescr, lblTitlePlace, lblPrice, lblSched;
     private DatabaseReference itemRef;
+    private String lstDay[] = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class Detailsscr extends AppCompatActivity {
 
         lblDescr = findViewById(R.id.lblDescription);
         lblTitlePlace = findViewById(R.id.lblTitlePlace);
+        lblPrice=findViewById(R.id.lblPrice);
+        lblSched=findViewById(R.id.lblSched);
 
         curItem = getIntent().getStringExtra("ref");
 
@@ -49,8 +53,28 @@ public class Detailsscr extends AppCompatActivity {
                     s = s.replace("%20"," ");
                     lblTitlePlace.setText(s);
                     lblDescr.setText(dataSnapshot.child("Descr").getValue(String.class));
+                    lblPrice.setVisibility(View.GONE);
+                    lblSched.setVisibility(View.GONE);
                 }
                 else{
+                    String price = "Approx. price : " + dataSnapshot.child("Prices").child("min").getValue(String.class) + " - " + dataSnapshot.child("Prices").child("max").getValue(String.class);
+                    lblPrice.setText(price);
+
+                    //Go through the element schedule
+                    String sched="";
+                    for (int i=0 ; i<7 ; i++){
+                        if(dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class).equals("closed")){
+                            sched+=lstDay[i] + " : " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class);
+                        }
+                        else{
+                            sched+=lstDay[i] + " : " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class) + " - " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Close").getValue(String.class);
+                        }
+                        if(i!=6){
+                            sched+="\n";
+                        }
+                    }
+
+                    lblSched.setText(sched);
                     lblTitlePlace.setText(dataSnapshot.child("Name").getValue(String.class));
                     lblDescr.setText(dataSnapshot.child("Descr").getValue(String.class));
                 }
