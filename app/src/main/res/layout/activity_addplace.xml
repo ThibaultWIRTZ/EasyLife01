@@ -114,7 +114,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:ems="10"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:selectAllOnFocus="true" />
 
                 </LinearLayout>
 
@@ -160,7 +161,7 @@
                         android:layout_weight="0.3"
                         android:ems="10"
                         android:gravity="top"
-                        android:inputType="textMultiLine|textPersonName"
+                        android:inputType="textMultiLine"
                         android:lines="10"
                         android:textAlignment="textStart" />
 
@@ -384,6 +385,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.7"
+                android:onClick="onClickSend"
                 android:text="Send" />
 
         </LinearLayout>

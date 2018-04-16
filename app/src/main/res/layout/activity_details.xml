@@ -34,7 +34,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="52dp"
                 android:layout_weight="0.2"
                 android:gravity="top"
                 android:orientation="vertical"
@@ -51,6 +51,15 @@
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/common_full_open_on_phone" />
 
+                <Button
+                    android:id="@+id/btnWatchWay"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="0.8"
+                    android:text="@string/dir" />
+
                 <TextView
                     android:id="@+id/lblTitlePlace"
                     android:layout_width="match_parent"
@@ -61,11 +70,20 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/lblPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Prices"
+                    android:textAlignment="textStart"
+                    android:textSize="35px" />
+
+                <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="7"
-                    android:text="TextView"
+                    android:text="Opening hours"
+                    android:textAlignment="textStart"
                     android:textSize="35px" />
 
                 <TextView
@@ -80,14 +98,6 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnWatchWay"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_weight="0.8"
-                android:text="@string/dir" />
         </LinearLayout>
     </ScrollView>
 

@@ -59,6 +59,6 @@
     <string name="notFav">☆</string>
     <string name="inFav">★</string>
     <string name="logStc">Enter your login details or Create a new account</string>
-    <string name="dir">Directions</string>
+    <string name="dir">Direction</string>
 
 </resources>
