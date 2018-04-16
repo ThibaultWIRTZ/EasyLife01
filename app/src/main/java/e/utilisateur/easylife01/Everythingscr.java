@@ -2,25 +2,21 @@ package e.utilisateur.easylife01;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +27,9 @@ public class Everythingscr extends AppCompatActivity {
     private List<String> lst = new ArrayList<String>();
     private ListView lstAct;
     private String categAct = "University";
+    private List<DatabaseReference> lstRef= new ArrayList<DatabaseReference>();
+    private List<DataSnapshot> lstCat= new ArrayList<DataSnapshot>();
+    private List<DataSnapshot> lstType= new ArrayList<DataSnapshot>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class Everythingscr extends AppCompatActivity {
 
         mDataBase = FirebaseDatabase.getInstance().getReference();
         lstAct = findViewById(R.id.lstCateg);
-
 
         if (savedInstanceState != null) {
             categAct = savedInstanceState.getString("cat");
@@ -97,17 +95,20 @@ public class Everythingscr extends AppCompatActivity {
 
                 //First clear elements of the list
                 lst.clear();
+                lstRef.clear();
                 setTitle(categAct);
 
                 if(categAct.equals("University")){
                     for(DataSnapshot name : dataSnapshot.child(categAct).getChildren()){
                         lst.add(name.getKey());
+                        lstRef.add(name.getRef());
                     }
                 }
                 else{
                     for(DataSnapshot type : dataSnapshot.child(categAct).getChildren()){
                         for(DataSnapshot id : type.getChildren()){
                             lst.add(id.child("Name").getValue(String.class));
+                            lstRef.add(id.getRef());
                         }
                     }
                 }
@@ -118,6 +119,20 @@ public class Everythingscr extends AppCompatActivity {
                 //Compare name of category with name of listView
                 lstAct.setAdapter(arrayAdapter);
 
+                lstAct.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                            long arg3)
+                    {
+                        Intent intent = new Intent(Everythingscr.this, Detailsscr.class);
+                        intent.putExtra("ref",lstRef.get(position).toString());
+                        startActivity(intent);
+                        // assuming string and if you want to get the value on click of list item
+                        // do what you intend to do on click of listview row
+
+                    }
+                });
             }
 
             @Override
