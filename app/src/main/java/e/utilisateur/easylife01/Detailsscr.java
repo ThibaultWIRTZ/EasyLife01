@@ -57,9 +57,13 @@ public class Detailsscr extends AppCompatActivity {
                     lblSched.setVisibility(View.GONE);
                 }
                 else{
-                    String price = "Approx. price : " + dataSnapshot.child("Prices").child("min").getValue(String.class) + " - " + dataSnapshot.child("Prices").child("max").getValue(String.class);
-                    lblPrice.setText(price);
-
+                    if(!itemRef.getParent().getKey().equals("Shops")){
+                        String price = "Approx. price : " + dataSnapshot.child("Prices").child("min").getValue(String.class) + " - " + dataSnapshot.child("Prices").child("max").getValue(String.class);
+                        lblPrice.setText(price);
+                    }
+                    else{
+                        lblPrice.setVisibility(View.GONE);
+                    }
                     //Go through the element schedule
                     String sched="";
                     for (int i=0 ; i<7 ; i++){

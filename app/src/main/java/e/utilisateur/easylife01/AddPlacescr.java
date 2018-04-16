@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -32,10 +33,10 @@ public class AddPlacescr extends AppCompatActivity {
     private Spinner spiCateg, spiType;
     private List<Spinner> lstSpiOpen = new ArrayList<>();
     private Spinner sp;
-    private EditText edtName,edtDescr;
+    private EditText edtName,edtDescr,edtMax,edtMin;
     private int biggestID=0;
     private String userAdmin;
-
+    private LinearLayout linPrice;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,9 @@ public class AddPlacescr extends AppCompatActivity {
         spiType = findViewById(R.id.spiType);
         edtName = findViewById(R.id.edtName);
         edtDescr = findViewById(R.id.edtDescr);
+        edtMax = findViewById(R.id.edtMaxPrice);
+        edtMin = findViewById(R.id.edtMinPrice);
+        linPrice = findViewById(R.id.linLayPrice);
 
         mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).child("isAdmin").addValueEventListener(new ValueEventListener() {
             @Override
@@ -85,10 +89,16 @@ public class AddPlacescr extends AppCompatActivity {
         spiCateg.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if(selectedItemView.toString()=="Select a category"){
+                if(parentView.getItemAtPosition(position).toString()=="Select a category"){
                     spiType.setEnabled(false);
                 }
                 else{
+                    if(parentView.getItemAtPosition(position).toString().equals("Shops")){
+                        linPrice.setVisibility(View.GONE);
+                    }
+                    else{
+                        linPrice.setVisibility(View.VISIBLE);
+                    }
                     spiType.setEnabled(true);
                     mDatabase.child("Places").child(spiCateg.getSelectedItem().toString()).addValueEventListener(new ValueEventListener() {
                         @Override
@@ -233,6 +243,11 @@ public class AddPlacescr extends AppCompatActivity {
                 }
             }
 
+            if(!spiCateg.getSelectedItem().toString().equals("Shops")){
+                newPlace.child("Price").child("max").setValue(edtMax.getText().toString());
+                newPlace.child("Price").child("min").setValue(edtMin.getText().toString());
+            }
+
             Intent intent = new Intent(this, Selcatscr.class);
             startActivity(intent);
         }
@@ -253,14 +268,14 @@ public class AddPlacescr extends AppCompatActivity {
 
         for(int i=0;i<7;i++){
             Spinner tempSpiOpen = findViewById(getResources().getIdentifier("spiOpen"+lstDay[i],"id",getPackageName()));
-            if(tempSpiOpen.getSelectedItem().toString()=="closed"){
+            if(tempSpiOpen.getSelectedItem().toString().equals("closed")){
                 ctrOpen++;
             }
             Spinner tempSpiClose = findViewById(getResources().getIdentifier("spiClose"+lstDay[i],"id",getPackageName()));
-            if(tempSpiClose.getSelectedItem().toString()=="closed"){
+            if(tempSpiClose.getSelectedItem().toString().equals("closed")){
                 ctrClose++;
             }
-            if(tempSpiOpen.getSelectedItem().toString()!="closed" && tempSpiClose.getSelectedItem().toString()=="closed"){
+            if(!tempSpiOpen.getSelectedItem().toString().equals("closed") && tempSpiClose.getSelectedItem().toString().equals("closed")){
                 return "This place have to close on " + lstDay[i];
             }
         }
@@ -279,6 +294,13 @@ public class AddPlacescr extends AppCompatActivity {
         }
         else if(ctrClose==7){
             return "This place need close hours";
+        }
+        else if(!spiCateg.getSelectedItem().toString().equals("Shops")) {
+            if (TextUtils.isEmpty(edtMax.getText().toString())) {
+                return "You must enter a max price";
+            } else if (TextUtils.isEmpty(edtMin.getText().toString())) {
+                return "You must enter a max price";
+            }
         }
 
         return "no";
