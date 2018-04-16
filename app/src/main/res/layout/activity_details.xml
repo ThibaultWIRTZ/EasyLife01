@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,76 +18,63 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ToolbarTheme" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="0.2"
+            android:gravity="top"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
-                android:layout_weight="0.2"
-                android:gravity="top"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/common_full_open_on_phone" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/common_full_open_on_phone" />
-
-                <TextView
-                    android:id="@+id/lblTitlePlace"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Title of the place"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="true"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="7"
-                    android:text="TextView"
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/lblDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="10"
-                    android:text="Description"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false"
-                    android:textSize="35px" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnWatchWay"
+            <TextView
+                android:id="@+id/lblTitlePlace"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_weight="0.8"
-                android:text="Watch way" />
+                android:layout_height="wrap_content"
+                android:text="Title of the place"
+                android:textAlignment="textStart"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lblDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="15"
+                android:text="Description"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textSize="35px" />
+
         </LinearLayout>
-    </ScrollView>
+
+        <Button
+            android:id="@+id/btnWatchWay"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="0.8"
+            android:text="@string/dir" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
