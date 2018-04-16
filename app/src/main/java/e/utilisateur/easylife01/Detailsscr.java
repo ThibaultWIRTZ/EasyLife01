@@ -62,27 +62,6 @@ public class Detailsscr extends AppCompatActivity {
             }
         });
 
-        /*if(savedInstanceState!=null){
-            curID=savedInstanceState.getString("curID");
-            curCat=savedInstanceState.getString("curCat");
-            curType=savedInstanceState.getString("curType");
-        }*/
-
-
-        //Set title, description and image
-        /*mDataBase.child("Places").child(curCat).child(curType).child(curID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                lblTitlePlace.setText(dataSnapshot.child("Name").getValue(String.class));
-                lblDescr.setText(dataSnapshot.child("Descr").getValue(String.class));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
@@ -90,14 +69,6 @@ public class Detailsscr extends AppCompatActivity {
     }
 }
 /*
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("curCat",curCat);
-        outState.putString("curID",curID);
-        outState.putString("curType",curType);
-        super.onSaveInstanceState(outState);
-    }
-
     public boolean isFav(){
         mDataBase.addValueEventListener(new ValueEventListener() {
             @Override

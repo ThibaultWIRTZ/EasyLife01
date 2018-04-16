@@ -87,5 +87,13 @@
                 android:value=".Everythingscr"/>
         </activity>
 
+        <activity android:name=".AddPlacescr"
+            android:label="Request"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr"/>
+        </activity>
+
     </application>
 </manifest>

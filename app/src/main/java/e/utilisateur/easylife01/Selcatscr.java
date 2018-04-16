@@ -106,6 +106,11 @@ public class Selcatscr extends AppCompatActivity {
                     startActivity(intent02);
                     return true;
 
+                case R.id.action_request:
+                    Intent intent03 = new Intent(this,AddPlacescr.class);
+                    startActivity(intent03);
+                    return true;
+
                 default:
                     return super.onOptionsItemSelected(item);
             }
@@ -125,6 +130,11 @@ public class Selcatscr extends AppCompatActivity {
                 case R.id.action_feedback:
                     Intent intent02 = new Intent(this,Feedbackscr.class);
                     startActivity(intent02);
+                    return true;
+
+                case R.id.action_request:
+                    Intent intent03 = new Intent(this,AddPlacescr.class);
+                    startActivity(intent03);
                     return true;
 
                 default:
