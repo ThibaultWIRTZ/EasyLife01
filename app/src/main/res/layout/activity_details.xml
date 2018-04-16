@@ -75,7 +75,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_weight="0.8"
-            android:text="Watch way" />
+            android:text="@string/dir" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

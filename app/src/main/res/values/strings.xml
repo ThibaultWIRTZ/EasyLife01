@@ -2,12 +2,12 @@
     <string name="app_name">EasyLife</string>
 
     <!-- Welcome screen -->
-    <string name="welStc">Welcome on Easylife, Swipe up to continue</string>
-    <string name="upArrow">▲</string>
+    <string name="welStc">Welcome to Easylife, Click continue to enter login screen</string>
+    <string name="welBut">Continue</string>
 
 
     <!-- Login Screen -->
-    <string name="logStc">First of all, enter your logs or create an account</string>
+    <string name="titleLog">Login</string>
     <string name="logBtnTxt">Login</string>
     <string name="crtAccBtnTxt">Create an account</string>
     <string name="txtPseMail">Mail</string>
@@ -24,8 +24,8 @@
     <string name="txtPsw">Password</string>
     <string name="txtMail">E-Mail</string>
     <string name="txtConf">Confirmation</string>
-    <string name="txtCrtAcc">Enter your information</string>
-    <string name="txtCrtion">Creation</string>
+    <string name="txtCrtAcc">Enter your details</string>
+    <string name="txtCrtion">Create</string>
 
 
     <!-- Category selection screen -->
@@ -58,5 +58,7 @@
     <string name="txtCtn">Continue</string>
     <string name="notFav">☆</string>
     <string name="inFav">★</string>
+    <string name="logStc">Enter your login details or Create a new account</string>
+    <string name="dir">Directions</string>
 
 </resources>
