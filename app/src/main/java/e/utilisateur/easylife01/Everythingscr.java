@@ -107,8 +107,10 @@ public class Everythingscr extends AppCompatActivity {
                 else{
                     for(DataSnapshot type : dataSnapshot.child(categAct).getChildren()){
                         for(DataSnapshot id : type.getChildren()){
-                            lst.add(id.child("Name").getValue(String.class));
-                            lstRef.add(id.getRef());
+                            if(Integer.parseInt(id.getKey())>0){
+                                lst.add(id.child("Name").getValue(String.class));
+                                lstRef.add(id.getRef());
+                            }
                         }
                     }
                 }
