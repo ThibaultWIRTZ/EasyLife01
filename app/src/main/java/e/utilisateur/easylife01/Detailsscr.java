@@ -124,15 +124,17 @@ public class Detailsscr extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
 
+        isFav();
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
     }
 
-    public boolean isFav(){
+    public void isFav(){
         //Check if fav
         String s = itemRef.getKey().replace("%20"," ");
         mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").child(itemRef.getParent().getKey()).child(s).addValueEventListener(new ValueEventListener() {
@@ -151,8 +153,6 @@ public class Detailsscr extends AppCompatActivity {
 
                 }
             });
-
-            return b;
     }
 
     @Override
@@ -160,7 +160,7 @@ public class Detailsscr extends AppCompatActivity {
         // Inflate the menu_main; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_detail, menu);
         this.menu=menu;
-        if(!isFav()==true){
+        if(b==false){
             menu.findItem(R.id.action_addFav).setTitle(getResources().getString(R.string.notFav));
         }
         return true;
@@ -176,11 +176,13 @@ public class Detailsscr extends AppCompatActivity {
                 DatabaseReference db = mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").child(itemRef.getParent().getKey()).child(s);
                 MenuItem it =menu.findItem(R.id.action_addFav);
 
-                if(isFav()==true){
+                if(b==true){
                     db.setValue(null);
+                    b=false;
                     it.setTitle(getResources().getString(R.string.notFav));
                 }
                 else{
+                    b=true;
                     db.setValue("normal");
                     it.setTitle(getResources().getString(R.string.inFav));
                 }

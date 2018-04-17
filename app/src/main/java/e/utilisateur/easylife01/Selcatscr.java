@@ -38,7 +38,6 @@ public class Selcatscr extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selcatscr);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Loading information...");
@@ -56,7 +55,6 @@ public class Selcatscr extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String v = dataSnapshot.child("Name").getValue(String.class);
                 setTitle(v);
-                mProgress.dismiss();
                 String s = dataSnapshot.child("isAdmin").getValue(String.class);
                 if (s.equals("yes")){
                     admin=true;
@@ -64,6 +62,7 @@ public class Selcatscr extends AppCompatActivity {
                 else{
                     admin=false;
                 }
+                mProgress.dismiss();
             }
 
             @Override
@@ -71,13 +70,14 @@ public class Selcatscr extends AppCompatActivity {
 
             }
         });
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu_main; this adds items to the action bar if it is present.
 
-        if(admin==true){
+        if(admin){
             getMenuInflater().inflate(R.menu.menu_admincat, menu);
         }
         else{
