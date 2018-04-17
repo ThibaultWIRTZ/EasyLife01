@@ -1,13 +1,16 @@
 package e.utilisateur.easylife01;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telecom.Call;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +29,8 @@ public class Detailsscr extends AppCompatActivity {
     private TextView lblDescr, lblTitlePlace, lblPrice, lblSched;
     private DatabaseReference itemRef;
     private String lstDay[] = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+    private Object itemValue;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,31 +100,37 @@ public class Detailsscr extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
     }
-}
-/*
+
     public boolean isFav(){
-        mDataBase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String s = dataSnapshot.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").child(curCat).child(curType).child(curID).getValue(String.class);
-                if(s!=null)
-                    b = true;
-            }
+        //Check if fav
+        String s = itemRef.getKey().replace("%20"," ");
+        mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").child(itemRef.getParent().getKey()).child(s).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if( dataSnapshot.getValue(String.class) != null){
+                        b=true;
+                    }
+                    else{
+                        b=false;
+                    }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-        return b;
+                }
+            });
+
+            return b;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu_main; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_detail, menu);
-        if(isFav()){
-            menu.findItem(R.id.action_addFav).setChecked(true);
+        this.menu=menu;
+        if(!isFav()==true){
+            menu.findItem(R.id.action_addFav).setTitle(getResources().getString(R.string.notFav));
         }
         return true;
     }
@@ -130,14 +141,17 @@ public class Detailsscr extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_addFav:
-                DatabaseReference db = mDataBase.child("User").child(mAuth.getCurrentUser().getUid()).child(curCat).child(curType).child(curID);
-                if(isFav()){
+                String s = itemRef.getKey().replace("%20"," ");
+                DatabaseReference db = mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").child(itemRef.getParent().getKey()).child(s);
+                MenuItem it =menu.findItem(R.id.action_addFav);
+
+                if(isFav()==true){
                     db.setValue(null);
-                    item.setTitle(getResources().getString(R.string.notFav));
+                    it.setTitle(getResources().getString(R.string.notFav));
                 }
                 else{
                     db.setValue("normal");
-                    item.setTitle(getResources().getString(R.string.inFav));
+                    it.setTitle(getResources().getString(R.string.inFav));
                 }
                 return true;
 
@@ -146,4 +160,3 @@ public class Detailsscr extends AppCompatActivity {
         }
     }
 }
-*/

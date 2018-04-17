@@ -301,6 +301,9 @@ public class AddPlacescr extends AppCompatActivity {
             } else if (TextUtils.isEmpty(edtMin.getText().toString())) {
                 return "You must enter a max price";
             }
+            else if(Integer.parseInt(edtMin.getText().toString())>Integer.parseInt(edtMax.getText().toString())){
+                return  "Max must be bigger than min";
+            }
         }
 
         return "no";
