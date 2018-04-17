@@ -1,5 +1,8 @@
 package e.utilisateur.easylife01;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
@@ -9,6 +12,7 @@ import android.telecom.Call;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +22,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Detailsscr extends AppCompatActivity {
@@ -31,6 +40,7 @@ public class Detailsscr extends AppCompatActivity {
     private String lstDay[] = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     private Object itemValue;
     private Menu menu;
+    private ImageView imgPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,8 @@ public class Detailsscr extends AppCompatActivity {
         lblTitlePlace = findViewById(R.id.lblTitlePlace);
         lblPrice=findViewById(R.id.lblPrice);
         lblSched=findViewById(R.id.lblSched);
+
+        imgPlace=findViewById(R.id.imgPlace);
 
         curItem = getIntent().getStringExtra("ref");
 
@@ -82,6 +94,25 @@ public class Detailsscr extends AppCompatActivity {
                             sched+="\n";
                         }
                     }
+                    imgPlace.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                    String s = dataSnapshot.child("PicUrl").getValue(String.class);
+                        Picasso.with(Detailsscr.this).load(s).placeholder(R.mipmap.ic_launcher)
+                                .error(R.mipmap.ic_launcher)
+                                .into(imgPlace, new com.squareup.picasso.Callback() {
+                                    @Override
+                                    public void onSuccess() {
+
+                                    }
+
+                                    @Override
+                                    public void onError() {
+
+                                    }
+                                });
+
+
+
 
                     lblSched.setText(sched);
                     lblTitlePlace.setText(dataSnapshot.child("Name").getValue(String.class));
