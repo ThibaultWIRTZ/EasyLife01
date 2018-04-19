@@ -139,8 +139,8 @@ public class Detailsscr extends AppCompatActivity {
         mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child(itemRef.getParent().getKey()).equals("University")){
-                        String s = itemRef.getKey().replace("%20"," ");
+                    String s = itemRef.getKey().replace("%20"," ");
+                    if(itemRef.getParent().getKey().equals("University")){
                         if(dataSnapshot.child(itemRef.getParent().getKey()).child(s).getValue(String.class) != null){
                             b=true;
                         }
