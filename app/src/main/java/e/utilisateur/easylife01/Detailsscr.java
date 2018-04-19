@@ -136,15 +136,25 @@ public class Detailsscr extends AppCompatActivity {
 
     public void isFav(){
         //Check if fav
-        String s = itemRef.getKey().replace("%20"," ");
-        mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").child(itemRef.getParent().getKey()).child(s).addValueEventListener(new ValueEventListener() {
+        mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if( dataSnapshot.getValue(String.class) != null){
-                        b=true;
+                    if(dataSnapshot.child(itemRef.getParent().getKey()).equals("University")){
+                        String s = itemRef.getKey().replace("%20"," ");
+                        if(dataSnapshot.child(itemRef.getParent().getKey()).child(s).getValue(String.class) != null){
+                            b=true;
+                        }
+                        else{
+                            b=false;
+                        }
                     }
                     else{
-                        b=false;
+                        if(dataSnapshot.child(itemRef.getParent().getParent().getKey()).child(itemRef.getParent().getKey()).child(itemRef.getKey()).getValue(String.class) != null){
+                            b=true;
+                        }
+                        else{
+                            b=false;
+                        }
                     }
                 }
 
@@ -172,8 +182,16 @@ public class Detailsscr extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_addFav:
-                String s = itemRef.getKey().replace("%20"," ");
-                DatabaseReference db = mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav").child(itemRef.getParent().getKey()).child(s);
+                String s;
+                DatabaseReference db = mDataBase.child("Users").child(mAuth.getCurrentUser().getUid()).child("Fav");
+                s = itemRef.getKey().replace("%20"," ");
+                if(itemRef.getParent().getKey().equals("University")){
+                    db = db.child(itemRef.getParent().getKey()).child(s);
+                }
+                else{
+                    db =  db.child(itemRef.getParent().getParent().getKey()).child(itemRef.getParent().getKey()).child(s);
+                }
+
                 MenuItem it =menu.findItem(R.id.action_addFav);
 
                 if(b==true){
