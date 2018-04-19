@@ -33,7 +33,7 @@ public class AddPlacescr extends AppCompatActivity {
     private Spinner spiCateg, spiType;
     private List<Spinner> lstSpiOpen = new ArrayList<>();
     private Spinner sp;
-    private EditText edtName,edtDescr,edtMax,edtMin;
+    private EditText edtName,edtDescr,edtMax,edtMin,edtCity,edtNbStreet,edtCdPst,edtCountry,edtStreetName;
     private int biggestID=0;
     private String userAdmin;
     private LinearLayout linPrice;
@@ -53,6 +53,11 @@ public class AddPlacescr extends AppCompatActivity {
         edtMax = findViewById(R.id.edtMaxPrice);
         edtMin = findViewById(R.id.edtMinPrice);
         linPrice = findViewById(R.id.linLayPrice);
+        edtNbStreet=findViewById(R.id.edtNbStreet);
+        edtStreetName=findViewById(R.id.edtStreet);
+        edtCdPst=findViewById(R.id.edtPostCode);
+        edtCity=findViewById(R.id.edtCity);
+        edtCountry=findViewById(R.id.edtCountry);
 
         mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).child("isAdmin").addValueEventListener(new ValueEventListener() {
             @Override
@@ -228,11 +233,13 @@ public class AddPlacescr extends AppCompatActivity {
             DatabaseReference newPlace = mDatabase.child(branch).child(spiCateg.getSelectedItem().toString()).child(spiType.getSelectedItem().toString()).child(String.valueOf(biggestID+1));
             newPlace.child("Name").setValue(edtName.getText().toString());
             newPlace.child("Descr").setValue(edtDescr.getText().toString());
+            String address = edtNbStreet.getText().toString() + " " + edtStreetName.getText().toString() + ", " + edtCdPst.getText().toString() + " " + edtCity.getText().toString() + ", " + edtCountry.getText().toString();
+            newPlace.child("Address").setValue(address);
 
             for(int i=0 ; i<7 ; i++){
                 //Opening hours
                 String selItem = lstSpiOpen.get(i).getSelectedItem().toString();
-                DatabaseReference sched = newPlace.child("Schedule").child(String.valueOf(i));
+                DatabaseReference sched = newPlace.child("Sched").child(String.valueOf(i));
                 sched.child("Open").setValue(selItem);
 
                 if(selItem!="closed"){
@@ -244,8 +251,8 @@ public class AddPlacescr extends AppCompatActivity {
             }
 
             if(!spiCateg.getSelectedItem().toString().equals("Shops")){
-                newPlace.child("Price").child("max").setValue(edtMax.getText().toString());
-                newPlace.child("Price").child("min").setValue(edtMin.getText().toString());
+                newPlace.child("Prices").child("min").setValue(edtMin.getText().toString());
+                newPlace.child("Prices").child("max").setValue(edtMax.getText().toString());
             }
 
             Intent intent = new Intent(this, Selcatscr.class);
@@ -280,7 +287,22 @@ public class AddPlacescr extends AppCompatActivity {
             }
         }
 
-        if(spiCateg.getSelectedItem().toString().equals("Select a category")){
+        if(TextUtils.isEmpty(edtNbStreet.getText())){
+            return "You must enter a street number";
+        }
+        else if(TextUtils.isEmpty(edtStreetName.getText())){
+            return "You must enter the name of the street";
+        }
+        else if(TextUtils.isEmpty(edtCdPst.getText())){
+            return "You must enter a Postal code";
+        }
+        else if(TextUtils.isEmpty(edtCity.getText())){
+            return "You must enter a city to have a complete address";
+        }
+        else if(TextUtils.isEmpty(edtCountry.getText())){
+            return "You must enter a country";
+        }
+        else if(spiCateg.getSelectedItem().toString().equals("Select a category")){
             return "You must select a category";
         }
         else if(TextUtils.isEmpty(edtName.getText())){

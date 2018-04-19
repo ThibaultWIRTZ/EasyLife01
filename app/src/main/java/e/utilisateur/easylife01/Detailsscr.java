@@ -74,7 +74,7 @@ public class Detailsscr extends AppCompatActivity {
                     lblSched.setVisibility(View.GONE);
                 }
                 else{
-                    if(!itemRef.getParent().getKey().equals("Shops")){
+                    if(!itemRef.getParent().getParent().getKey().equals("Shops")){
                         String price = "Approx. price : " + dataSnapshot.child("Prices").child("min").getValue(String.class) + " - " + dataSnapshot.child("Prices").child("max").getValue(String.class);
                         lblPrice.setText(price);
                     }

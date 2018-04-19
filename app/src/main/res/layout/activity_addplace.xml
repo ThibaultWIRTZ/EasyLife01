@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +38,87 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/linLayAd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="0.7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lblAdresse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Adress" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtNbStreet"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:ems="10"
+                        android:hint="Nb"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/edtStreet"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:ems="10"
+                        android:hint="Street"
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtPostCode"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Postal code"
+                        android:inputType="textPostalAddress" />
+
+                    <EditText
+                        android:id="@+id/edtCity"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="City"
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edtCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Country"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/linLayBasics"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_weight="0.7"
                 android:orientation="vertical">
 
@@ -203,7 +280,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:ems="10"
-                        android:inputType="textPersonName" />
+                        android:inputType="number" />
 
                 </LinearLayout>
 
@@ -226,7 +303,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:ems="10"
-                        android:inputType="textPersonName" />
+                        android:inputType="number" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -84,6 +84,7 @@ public class CrtAccscr extends AppCompatActivity {
 
                                 //Store name to user ID
                                 user_id.child("Name").setValue(name);
+                                user_id.child("isAdmin").setValue("no");
 
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
