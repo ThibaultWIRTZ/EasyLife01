@@ -54,6 +54,7 @@
     <!-- General strings -->
     <string name="txtFind">Find</string>
     <string name="txtDc">I dont mind</string>
+    <string name="txttypefood"></string>
     <string name="txterror">Please enter a perimeter or choose the option I dont mind.</string>
     <string name="txtCtn">Continue</string>
     <string name="notFav">☆</string>

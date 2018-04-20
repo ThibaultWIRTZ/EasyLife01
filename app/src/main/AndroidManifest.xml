@@ -105,5 +105,13 @@
                 android:value=".Selcatscr"/>
         </activity>
 
+        <activity
+            android:name=".Typefood"
+            android:label="Type of Food"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr" />
+        </activity>
     </application>
 </manifest>

@@ -43,7 +43,7 @@ public class Periscr extends AppCompatActivity {
 
     public void onClickContinue(View view){
 
-        /*if(edtPeri.getText().toString().equals("") && (findViewById(R.id.edtPeri).isEnabled()))
+        if(edtPeri.getText().toString().equals("") && (findViewById(R.id.edtPeri).isEnabled()))
         {
             findViewById(R.id.txterror).setVisibility(View.VISIBLE);
         }
@@ -59,7 +59,7 @@ public class Periscr extends AppCompatActivity {
                 Intent intent = new Intent(this, CrtAccscr.class);
                 startActivity(intent);
             }
-        }*/
+        }
     }
 
 

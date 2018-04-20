@@ -160,7 +160,7 @@ public class Selcatscr extends AppCompatActivity {
 
     public void onClickResto(View view) {
         int choice = 2;
-        Intent intent = new Intent(this, Periscr.class);
+        Intent intent = new Intent(this, Typefood.class);
         intent.putExtra("choice", choice);
         startActivity(intent);
     }
