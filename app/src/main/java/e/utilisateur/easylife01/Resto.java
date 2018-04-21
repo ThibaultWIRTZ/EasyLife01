@@ -27,7 +27,8 @@ public class Resto  extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private ListView lstResto;
+    private List<String> lstResto;
+    private ListView lstR;
     private DatabaseReference itemVal;
     private List<String> lstP;
     private List<String> lstRef;
@@ -52,9 +53,10 @@ public class Resto  extends AppCompatActivity {
 
         lstRef = new ArrayList<>();
 
-        lstResto = findViewById(R.id.lstCateg);
 
-        lstResto.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        lstR = findViewById(R.id.lstCateg);
+
+        lstR.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
@@ -133,37 +135,37 @@ public class Resto  extends AppCompatActivity {
                                 case 0:
                                     if(min>=0 && min<=10)
                                     {
-
+                                        lstResto.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 1:
                                     if(min>=10 && min<=20)
                                     {
-
+                                        lstResto.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 2:
                                     if(min>=20 && min<=30)
                                     {
-
+                                        lstResto.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 3:
                                     if(min>=30 && min<=40)
                                     {
-
+                                        lstResto.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 4:
                                     if(min>=40 && min<=50)
                                     {
-
+                                        lstResto.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 5:
                                     if(min >= 50)
                                     {
-
+                                        lstResto.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                             }
