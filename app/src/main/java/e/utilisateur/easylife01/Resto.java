@@ -27,10 +27,9 @@ public class Resto  extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private List<String> lstResto;
-    private ListView lstR;
+    private ListView lstResto;
     private DatabaseReference itemVal;
-    private List<String> lstP;
+    private List<String> lstR;
     private List<String> lstRef;
     private String Cat, ID;
 
@@ -44,19 +43,18 @@ public class Resto  extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_price);
+        setContentView(R.layout.activity_everything);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         mDataBase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
+        lstR = new ArrayList<>();
         lstRef = new ArrayList<>();
+        lstResto = findViewById(R.id.lstCateg);
 
-
-        lstR = findViewById(R.id.lstCateg);
-
-        lstR.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        lstResto.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
@@ -71,7 +69,7 @@ public class Resto  extends AppCompatActivity {
             }
         });
 
-        spinPrice = findViewById(R.id.spinPrice);
+
         typefood = (String)getIntent().getSerializableExtra("typefood");
         price = (String)getIntent().getSerializableExtra("price");
 
@@ -108,14 +106,40 @@ public class Resto  extends AppCompatActivity {
 
     public void refreshVue() {
         lstRef.clear();
-        lstP.clear();
+        lstR.clear();
         //Go through fav and check for same "normal" in database
 
         if(typefood == "dont mind" && price == "dont mind")
         {
+            mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot resto) {
 
+                    for(DataSnapshot categ : resto.getChildren()){
+                        for(DataSnapshot nb : categ.getChildren()){
+                            //if(nb.child()) != "nullItem")
+                            //{
+                                for(DataSnapshot name : nb.getChildren()) {
+                                    if (nb.getKey() != "0") {
+                                        lstR.add(name.child("Name").getValue(String.class));
+                                        lstRef.add(name.getRef().toString());
+                                        //Adapteur lstView
+                                        ArrayAdapter adptResto = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
+                                        lstResto.setAdapter(adptResto);
+                                    }
+                                }
+                            //}
+                        }
+                    }
+
+                }
+
+                    @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
-
 
         if(typefood != "dont mind") {
             mDataBase.child("Places").child("Restaurants").child(typefood).addValueEventListener(new ValueEventListener() {
@@ -135,46 +159,46 @@ public class Resto  extends AppCompatActivity {
                                 case 0:
                                     if(min>=0 && min<=10)
                                     {
-                                        lstResto.add(range.child("Name").getValue().toString());
+                                        lstR.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 1:
                                     if(min>=10 && min<=20)
                                     {
-                                        lstResto.add(range.child("Name").getValue().toString());
+                                        lstR.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 2:
                                     if(min>=20 && min<=30)
                                     {
-                                        lstResto.add(range.child("Name").getValue().toString());
+                                        lstR.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 3:
                                     if(min>=30 && min<=40)
                                     {
-                                        lstResto.add(range.child("Name").getValue().toString());
+                                        lstR.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 4:
                                     if(min>=40 && min<=50)
                                     {
-                                        lstResto.add(range.child("Name").getValue().toString());
+                                        lstR.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                                 case 5:
                                     if(min >= 50)
                                     {
-                                        lstResto.add(range.child("Name").getValue().toString());
+                                        lstR.add(range.child("Name").getValue().toString());
                                     }
                                     break;
                             }
                             //DatabaseReference dbr = mDataBase.child("Places").child("Restaurant").child(type.getKey());
                             lstRef.add(range.getRef().toString());
-                            lstP.add(range.getKey());
+                            lstR.add(range.getKey());
 
                             //Adapteur lstView
-                            ArrayAdapter adptTypeFood = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstP);
+                            ArrayAdapter adptTypeFood = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
                             spinPrice.setAdapter(adptTypeFood);
                         }
 
@@ -207,10 +231,10 @@ public class Resto  extends AppCompatActivity {
 
                                 //DatabaseReference dbr = mDataBase.child("Places").child("Restaurant").child(type.getKey());
                                 lstRef.add(range.getRef().toString());
-                                lstP.add(range.getKey());
+                                lstR.add(range.getKey());
 
                                 //Adapteur lstView
-                                ArrayAdapter adptTypeFood = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstP);
+                                ArrayAdapter adptTypeFood = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
                                 spinPrice.setAdapter(adptTypeFood);
                             }
 
