@@ -109,116 +109,13 @@ public class Resto  extends AppCompatActivity {
         lstR.clear();
         //Go through fav and check for same "normal" in database
 
-        if(typefood == "dont mind" && price == "dont mind")
-        {
-            mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot resto) {
-
-                    for(DataSnapshot categ : resto.getChildren()){
-                        for(DataSnapshot nb : categ.getChildren()){
-                            //if(nb.child()) != "nullItem")
-                            //{
-                                for(DataSnapshot name : nb.getChildren()) {
-                                    if (nb.getKey() != "0") {
-                                        lstR.add(name.child("Name").getValue(String.class));
-                                        lstRef.add(name.getRef().toString());
-                                        //Adapteur lstView
-                                        ArrayAdapter adptResto = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
-                                        lstResto.setAdapter(adptResto);
-                                    }
-                                }
-                            //}
-                        }
-                    }
-
-                }
-
-                    @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
 
         if(typefood != "dont mind") {
-            mDataBase.child("Places").child("Restaurants").child(typefood).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot resto) {
-
-                    for (DataSnapshot r : resto.getChildren()) {
-
-                        for (DataSnapshot range : r.getChildren()) {
-
-                            //Find type
-
-                            min = (int)range.child("Price").child("min").getValue();
-
-                            switch (choix)
-                            {
-                                case 0:
-                                    if(min>=0 && min<=10)
-                                    {
-                                        lstR.add(range.child("Name").getValue().toString());
-                                    }
-                                    break;
-                                case 1:
-                                    if(min>=10 && min<=20)
-                                    {
-                                        lstR.add(range.child("Name").getValue().toString());
-                                    }
-                                    break;
-                                case 2:
-                                    if(min>=20 && min<=30)
-                                    {
-                                        lstR.add(range.child("Name").getValue().toString());
-                                    }
-                                    break;
-                                case 3:
-                                    if(min>=30 && min<=40)
-                                    {
-                                        lstR.add(range.child("Name").getValue().toString());
-                                    }
-                                    break;
-                                case 4:
-                                    if(min>=40 && min<=50)
-                                    {
-                                        lstR.add(range.child("Name").getValue().toString());
-                                    }
-                                    break;
-                                case 5:
-                                    if(min >= 50)
-                                    {
-                                        lstR.add(range.child("Name").getValue().toString());
-                                    }
-                                    break;
-                            }
-                            //DatabaseReference dbr = mDataBase.child("Places").child("Restaurant").child(type.getKey());
-                            lstRef.add(range.getRef().toString());
-                            lstR.add(range.getKey());
-
-                            //Adapteur lstView
-                            ArrayAdapter adptTypeFood = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
-                            spinPrice.setAdapter(adptTypeFood);
-                        }
-
-                    }
-                    //Find category
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
-        else
-        {
-            mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot tf) {
-                    for (DataSnapshot resto : tf.getChildren()) {
+            if(price != "dont mind")
+            {
+                mDataBase.child("Places").child("Restaurants").child(typefood).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot resto) {
 
                         for (DataSnapshot r : resto.getChildren()) {
 
@@ -226,9 +123,47 @@ public class Resto  extends AppCompatActivity {
 
                                 //Find type
 
+                                min = (int)range.child("Price").child("min").getValue();
 
-
-
+                                switch (choix)
+                                {
+                                    case 0:
+                                        if(min>=0 && min<=10)
+                                        {
+                                            lstR.add(range.child("Name").getValue().toString());
+                                        }
+                                        break;
+                                    case 1:
+                                        if(min>=10 && min<=20)
+                                        {
+                                            lstR.add(range.child("Name").getValue().toString());
+                                        }
+                                        break;
+                                    case 2:
+                                        if(min>=20 && min<=30)
+                                        {
+                                            lstR.add(range.child("Name").getValue().toString());
+                                        }
+                                        break;
+                                    case 3:
+                                        if(min>=30 && min<=40)
+                                        {
+                                            lstR.add(range.child("Name").getValue().toString());
+                                        }
+                                        break;
+                                    case 4:
+                                        if(min>=40 && min<=50)
+                                        {
+                                            lstR.add(range.child("Name").getValue().toString());
+                                        }
+                                        break;
+                                    case 5:
+                                        if(min >= 50)
+                                        {
+                                            lstR.add(range.child("Name").getValue().toString());
+                                        }
+                                        break;
+                                }
                                 //DatabaseReference dbr = mDataBase.child("Places").child("Restaurant").child(type.getKey());
                                 lstRef.add(range.getRef().toString());
                                 lstR.add(range.getKey());
@@ -240,15 +175,116 @@ public class Resto  extends AppCompatActivity {
 
                         }
                         //Find category
+
                     }
 
-                }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
 
-                }
-            });
+            }
+            else
+            {
+                mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot resto) {
+
+                        for(DataSnapshot categ : resto.getChildren()){
+                            for(DataSnapshot nb : categ.getChildren()){
+                                //if(nb.child()) != "nullItem")
+                                //{
+                                for(DataSnapshot name : nb.getChildren()) {
+                                    //if (nb.getKey() != "0") {
+                                    lstR.add(name.child("Name").getValue(String.class));
+                                    lstRef.add(name.getRef().toString());
+                                    //Adapteur lstView
+                                    ArrayAdapter adptResto = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
+                                    lstResto.setAdapter(adptResto);
+                                    //}
+                                }
+                                //}
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+        }
+        else
+        {
+            if(price != "dont mind")
+            {
+                mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot tf) {
+                        for (DataSnapshot resto : tf.getChildren()) {
+
+                            for (DataSnapshot r : resto.getChildren()) {
+
+                                for (DataSnapshot range : r.getChildren()) {
+
+                                    //Find type
+                                    //DatabaseReference dbr = mDataBase.child("Places").child("Restaurant").child(type.getKey());
+                                    lstRef.add(range.getRef().toString());
+                                    lstR.add(range.getKey());
+
+                                    //Adapteur lstView
+                                    ArrayAdapter adptTypeFood = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
+                                    spinPrice.setAdapter(adptTypeFood);
+                                }
+
+                            }
+                            //Find category
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+            else
+            {
+                mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot resto) {
+
+                        for(DataSnapshot categ : resto.getChildren()){
+                            for(DataSnapshot nb : categ.getChildren()){
+                                //if(nb.child()) != "nullItem")
+                                //{
+                                for(DataSnapshot name : nb.getChildren()) {
+                                    //if (nb.getKey() != "0") {
+                                    lstR.add(name.child("Name").getValue(String.class));
+                                    lstRef.add(name.getRef().toString());
+                                    //Adapteur lstView
+                                    ArrayAdapter adptResto = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
+                                    lstResto.setAdapter(adptResto);
+                                    //}
+                                }
+                                //}
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
         }
     }
 }
