@@ -113,5 +113,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Selcatscr" />
         </activity>
+
+        <activity
+            android:name=".Price"
+            android:label="Price"
+            android:parentActivityName=".Typefood">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Typefood" />
+        </activity>
+
+        <activity
+            android:name=".Resto"
+            android:label="Resto"
+            android:parentActivityName=".Price">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Price" />
+        </activity>
+
     </application>
 </manifest>
