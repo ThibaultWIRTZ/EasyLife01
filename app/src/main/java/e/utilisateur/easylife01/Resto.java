@@ -187,26 +187,26 @@ public class Resto  extends AppCompatActivity {
             }
             else
             {
-                mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
+                mDataBase.child("Places").child("Restaurants").child(typefood).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot resto) {
 
-                        for(DataSnapshot categ : resto.getChildren()){
-                            for(DataSnapshot nb : categ.getChildren()){
+                        //for(DataSnapshot categ : resto.getChildren()){
+                            for(DataSnapshot nb : resto.getChildren()){
                                 //if(nb.child()) != "nullItem")
                                 //{
-                                for(DataSnapshot name : nb.getChildren()) {
+                          //      for(DataSnapshot name : nb.getChildren()) {
                                     //if (nb.getKey() != "0") {
-                                    lstR.add(name.child("Name").getValue(String.class));
-                                    lstRef.add(name.getRef().toString());
+                                    lstR.add(nb.child("Name").getValue(String.class));
+                                    lstRef.add(nb.getRef().toString());
                                     //Adapteur lstView
                                     ArrayAdapter adptResto = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
                                     lstResto.setAdapter(adptResto);
                                     //}
-                                }
+                            //    }
                                 //}
                             }
-                        }
+                        //}
 
                     }
 
@@ -222,6 +222,7 @@ public class Resto  extends AppCompatActivity {
         {
             if(price != "dont mind")
             {
+                /*
                 mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot tf) {
@@ -251,7 +252,7 @@ public class Resto  extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
-                });
+                });*/
             }
             else
             {
@@ -260,21 +261,21 @@ public class Resto  extends AppCompatActivity {
                     public void onDataChange(DataSnapshot resto) {
 
                         for(DataSnapshot categ : resto.getChildren()){
-                            for(DataSnapshot nb : categ.getChildren()){
-                                //if(nb.child()) != "nullItem")
-                                //{
-                                for(DataSnapshot name : nb.getChildren()) {
-                                    //if (nb.getKey() != "0") {
-                                    lstR.add(name.child("Name").getValue(String.class));
-                                    lstRef.add(name.getRef().toString());
-                                    //Adapteur lstView
-                                    ArrayAdapter adptResto = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
-                                    lstResto.setAdapter(adptResto);
-                                    //}
-                                }
-                                //}
+                        for(DataSnapshot nb : categ.getChildren()){
+                            //if(nb.child()) != "nullItem")
+                            //{
+                            //      for(DataSnapshot name : nb.getChildren()) {
+                            //if (nb.getKey() != "0") {
+                            lstR.add(nb.child("Name").getValue(String.class));
+                            lstRef.add(nb.getRef().toString());
+                            //Adapteur lstView
+                            ArrayAdapter adptResto = new ArrayAdapter<>(Resto.this, android.R.layout.simple_list_item_1, lstR);
+                            lstResto.setAdapter(adptResto);
+                            //}
+                            //    }
                             }
                         }
+                        //}
 
                     }
 
