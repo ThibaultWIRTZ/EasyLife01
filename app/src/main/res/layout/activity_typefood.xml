@@ -6,88 +6,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RadioGroup
-        android:layout_width="379dp"
-        android:layout_height="149dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            app:layout_constraintBottom_toTopOf="@+id/button3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblFilter"
+            app:layout_constraintVertical_bias="0.0">
+
+
+            <RadioButton
+                android:id="@+id/rdBtnTypeFood"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:checked="true"
+                android:onClick="onClickTypeFood"
+                android:text="@string/txttypefood"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="109dp" />
+
+            <RadioButton
+                android:id="@+id/rdBtnDontMind"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:onClick="onClickDontMind"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="305dp" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinTypeFood"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toTopOf="@+id/button3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.239" />
+
+            <TextView
+                android:id="@+id/lblDontMind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtDc" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0">
-
-
-        <RadioButton
-            android:id="@+id/rdBtnTypeFood"
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:layout_weight="1"
-            android:checked="true"
-            android:onClick="onClickTypeFood"
-            android:text="@string/txttypefood"
-            tools:layout_editor_absoluteX="10dp"
-            tools:layout_editor_absoluteY="109dp" />
-
-        <RadioButton
-            android:id="@+id/rdBtnDontMind"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:layout_weight="1"
-            android:onClick="onClickDontMind"
-            android:text="@string/txtDc"
-            tools:layout_editor_absoluteX="10dp"
-            tools:layout_editor_absoluteY="305dp" />
-    </RadioGroup>
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarTheme" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="199dp"
-        android:layout_height="51dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="196dp"
-        android:text="@string/txtCtn"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:onClick="onClickContinue"
+        android:text="@string/txtCtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.726"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="202dp"
-        android:layout_height="61dp"
+        android:id="@+id/lblFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="Choose your type of food"
+        android:text="Choose your type of"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Spinner
-        android:id="@+id/spinTypeFood"
-        android:layout_width="340dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239" />
-
+        app:layout_constraintVertical_bias="0.162" />
 
 
 </android.support.constraint.ConstraintLayout>

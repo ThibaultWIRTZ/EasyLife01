@@ -1,5 +1,6 @@
 package e.utilisateur.easylife01;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,7 +31,7 @@ public class Logscr extends AppCompatActivity {
     private EditText edtEmail,edtPassword;
     private String email,password;
     public static final String TAG = CrtAccscr.class.getSimpleName();
-
+    private static final int ERROR_DIALOG_REQUEST = 9001;
     private ProgressDialog mProgress;
 
     @Override
@@ -36,17 +39,41 @@ public class Logscr extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logscr);
 
-        edtEmail = findViewById(R.id.edtLogin);
-        edtPassword = findViewById(R.id.edtPswLog);
+        if (isServicesOK()) {
+            edtEmail = findViewById(R.id.edtLogin);
+            edtPassword = findViewById(R.id.edtPswLog);
 
-        mAuth = FirebaseAuth.getInstance();
+            mAuth = FirebaseAuth.getInstance();
 
-        mProgress = new ProgressDialog(this);
+            mProgress = new ProgressDialog(this);
 
-        EditText editText = (EditText) findViewById(R.id.edtLogin);
-        editText.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+            EditText editText = (EditText) findViewById(R.id.edtLogin);
+            editText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+
+        }
+    }
+
+    public boolean isServicesOK(){
+        Log.d(TAG, "isServicesOK: checking google services version");
+
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(Logscr.this);
+
+        if(available == ConnectionResult.SUCCESS){
+            //everything is fine and the user can make map requests
+            Log.d(TAG, "isServicesOK: Google Play Services is working");
+            return true;
+        }
+        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            //an error occured but we can resolve it
+            Log.d(TAG, "isServicesOK: an error occured but we can fix it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(Logscr.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }else{
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
     public void onClickCrtAcc(View view) {
@@ -77,6 +104,7 @@ public class Logscr extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(Logscr.this,"Your email or your password is wrong",Toast.LENGTH_LONG).show();
                                 mProgress.dismiss();
                             }
                         }

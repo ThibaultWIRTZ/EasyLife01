@@ -32,11 +32,11 @@ public class Typefood extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private ListView lstTypeFood;
     private DatabaseReference itemVal;
     private List<String> lstTF;
     private List<String> lstRef;
-    private String Cat, ID;
+    private String Cat;
+    private TextView lblTitle;
 
     private Spinner spinTypeFood;
 
@@ -53,7 +53,13 @@ public class Typefood extends AppCompatActivity {
         lstTF = new ArrayList<>();
         lstRef = new ArrayList<>();
 
-        //lstTypeFood = findViewById(R.id.lstCateg);
+        Cat = getIntent().getStringExtra("choice");
+        lblTitle = findViewById(R.id.lblFilter);
+        String s = lblTitle.getText()+" " + Cat;
+        lblTitle.setText(s);
+
+        s = getTitle() + " " + Cat;
+        setTitle(s);
 
         spinTypeFood = findViewById(R.id.spinTypeFood);
 
@@ -70,7 +76,7 @@ public class Typefood extends AppCompatActivity {
         lstRef.clear();
         lstTF.clear();
         //Go through fav and check for same "normal" in database
-        mDataBase.child("Places").child("Restaurants").addValueEventListener(new ValueEventListener() {
+        mDataBase.child("Places").child(Cat).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot food) {
                 //Find category
@@ -95,28 +101,35 @@ public class Typefood extends AppCompatActivity {
     }
 
     public void onClickContinue(View view) {
-
-        if (findViewById(R.id.spinTypeFood).isEnabled()) {
-            Intent intent = new Intent(this, Price.class);
-            intent.putExtra("typefood", spinTypeFood.getSelectedItem().toString());
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, Price.class);
-            intent.putExtra("typefood", "dont mind");
-            startActivity(intent);
+        Class classe;
+        if(!Cat.equals("Shops")){
+            classe = Price.class;
+        }
+        else
+        {
+            classe = Resto.class;
         }
 
-
+        Intent intent=new Intent(this, classe);
+        intent.putExtra("categ",Cat);
+        if(Cat.equals("Shops")){
+            intent.putExtra("min","plus");
+        }
+        if (findViewById(R.id.spinTypeFood).isEnabled()) {
+            intent.putExtra("typefood", spinTypeFood.getSelectedItem().toString());
+        }
+        else {
+            intent.putExtra("typefood", "dont mind");
+        }
+        startActivity(intent);
     }
 
     public void onClickTypeFood(View view) {
-        findViewById(R.id.spinTypeFood).setEnabled(true);
-
-
+        spinTypeFood.setEnabled(true);
     }
 
     public void onClickDontMind(View view) {
-        findViewById(R.id.spinTypeFood).setEnabled(false);
+        spinTypeFood.setEnabled(false);
     }
 
 }

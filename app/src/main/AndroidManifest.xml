@@ -3,6 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="e.utilisateur.easylife01">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity android:name=".Welscr">
             <intent-filter>
@@ -105,9 +113,17 @@
                 android:value=".Selcatscr"/>
         </activity>
 
+        <activity android:name=".MapsActivity"
+            android:label="Location"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr"/>
+        </activity>
+
         <activity
             android:name=".Typefood"
-            android:label="Type of Food"
+            android:label="Type of"
             android:parentActivityName=".Selcatscr">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -117,19 +133,19 @@
         <activity
             android:name=".Price"
             android:label="Price"
-            android:parentActivityName=".Typefood">
+            android:parentActivityName=".Selcatscr">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Typefood" />
+                android:value=".Selcatscr" />
         </activity>
 
         <activity
             android:name=".Resto"
-            android:label="Resto"
-            android:parentActivityName=".Price">
+            android:label="Results"
+            android:parentActivityName=".Selcatscr">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Price" />
+                android:value=".Selcatscr" />
         </activity>
 
     </application>

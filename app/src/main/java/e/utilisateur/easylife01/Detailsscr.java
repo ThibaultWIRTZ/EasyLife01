@@ -1,5 +1,6 @@
 package e.utilisateur.easylife01;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telecom.Call;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +37,7 @@ public class Detailsscr extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String curID, curItem, curCat, curType;
     private boolean b = false;
-    private TextView lblDescr, lblTitlePlace, lblPrice, lblSched;
+    private TextView lblDescr, lblTitlePlace, lblPrice, lblSched, lblAddress;
     private DatabaseReference itemRef;
     private String lstDay[] = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
     private Object itemValue;
@@ -55,6 +57,7 @@ public class Detailsscr extends AppCompatActivity {
         lblTitlePlace = findViewById(R.id.lblTitlePlace);
         lblPrice=findViewById(R.id.lblPrice);
         lblSched=findViewById(R.id.lblSched);
+        lblAddress=findViewById(R.id.lblAddress);
 
         imgPlace=findViewById(R.id.imgPlace);
 
@@ -70,12 +73,13 @@ public class Detailsscr extends AppCompatActivity {
                     s = s.replace("%20"," ");
                     lblTitlePlace.setText(s);
                     lblDescr.setText(dataSnapshot.child("Descr").getValue(String.class));
+                    lblAddress.setText(dataSnapshot.child("Address").getValue(String.class));
                     lblPrice.setVisibility(View.GONE);
                     lblSched.setVisibility(View.GONE);
                 }
                 else{
                     if(!itemRef.getParent().getParent().getKey().equals("Shops")){
-                        String price = "Approx. price : " + dataSnapshot.child("Prices").child("min").getValue(String.class) + " - " + dataSnapshot.child("Prices").child("max").getValue(String.class);
+                        String price = "Approx. price : " + dataSnapshot.child("Prices").child("min").getValue(String.class) + " - " + dataSnapshot.child("Prices").child("max").getValue(String.class) + "€";
                         lblPrice.setText(price);
                     }
                     else{
@@ -115,6 +119,7 @@ public class Detailsscr extends AppCompatActivity {
 
 
                     lblSched.setText(sched);
+                    lblAddress.setText(dataSnapshot.child("Address").getValue(String.class));
                     lblTitlePlace.setText(dataSnapshot.child("Name").getValue(String.class));
                     lblDescr.setText(dataSnapshot.child("Descr").getValue(String.class));
                 }
@@ -209,5 +214,23 @@ public class Detailsscr extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void onClickDirection(View view) {
+        itemRef.child("Address").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String address = dataSnapshot.getValue(String.class);
+                Intent map = new Intent(Detailsscr.this,MapsActivity.class);
+                map.putExtra("ad",address);
+                Log.d("ad",address);
+                startActivity(map);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

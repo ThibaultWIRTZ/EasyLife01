@@ -159,22 +159,22 @@ public class Selcatscr extends AppCompatActivity {
     }
 
     public void onClickResto(View view) {
-        int choice = 2;
+        String choice = "Restaurants";
         Intent intent = new Intent(this, Typefood.class);
         intent.putExtra("choice", choice);
         startActivity(intent);
     }
 
     public void onClickPubBar(View view) {
-        int choice = 3;
-        Intent intent = new Intent(this, Periscr.class);
+        String choice = "PnB";
+        Intent intent = new Intent(this, Typefood.class);
         intent.putExtra("choice", choice);
         startActivity(intent);
     }
 
     public void onClickShop(View view) {
-        int choice = 4;
-        Intent intent = new Intent(this, Periscr.class);
+        String choice = "Shops";
+        Intent intent = new Intent(this, Typefood.class);
         intent.putExtra("choice", choice);
         startActivity(intent);
     }

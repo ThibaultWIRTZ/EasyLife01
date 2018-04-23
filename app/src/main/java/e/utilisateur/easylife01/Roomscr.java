@@ -91,6 +91,27 @@ public class Roomscr extends AppCompatActivity {
     }
 
     public void onClickFindRoom(View view) {
+        if(spiBuild.isEnabled()){
+            mDataBase.child("Places").child("University").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot univ) {
+                    String ad;
+                    for(DataSnapshot name : univ.getChildren()){
+                        if(name.getKey().equals(spiBuild.getSelectedItem().toString())){
+                            ad = name.child("Address").getValue(String.class);
+                            Log.d("address",ad);
+                            Intent map = new Intent(Roomscr.this,MapsActivity.class);
+                            map.putExtra("ad",ad);
+                            startActivity(map);
+                        }
+                    }
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 }

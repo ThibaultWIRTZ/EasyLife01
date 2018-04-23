@@ -16,10 +16,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Feedbackscr extends AppCompatActivity {
-    private DatabaseReference mDataBase;
+    private DatabaseReference mDataBase,fRef;
     private EditText edtFB;
-    private String txtFB;
+    private String txtFB, s;
     private FirebaseAuth mAuth;
+    private int maxNb;
 
 
     public void onCreate(Bundle savedInstanceState){
@@ -42,7 +43,7 @@ public class Feedbackscr extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                int maxNb=0;
+                maxNb=0;
                 for(DataSnapshot feedback : dataSnapshot.getChildren()){
                     //Look for the max value in table
                     int i = Integer.parseInt(feedback.getKey());
@@ -50,12 +51,6 @@ public class Feedbackscr extends AppCompatActivity {
                         maxNb=i;
                     }
                 }
-                String s = String.valueOf(maxNb+1);
-                //Add feedback to table
-                DatabaseReference fRef = mDataBase.child("FeedBacks").child(s);
-                txtFB = edtFB.getText().toString();
-                fRef.child("txt").setValue(txtFB);
-                fRef.child("user").setValue(mAuth.getCurrentUser().getUid());
             }
 
             @Override
@@ -64,7 +59,12 @@ public class Feedbackscr extends AppCompatActivity {
             }
         });
 
-
+        s = String.valueOf(maxNb+1);
+        //Add feedback to table
+        fRef = mDataBase.child("FeedBacks").child(s);
+        txtFB = edtFB.getText().toString();
+        fRef.child("txt").setValue(txtFB);
+        fRef.child("user").setValue(mAuth.getCurrentUser().getUid());
         Intent intent = new Intent(this,Selcatscr.class);
         startActivity(intent);
     }
