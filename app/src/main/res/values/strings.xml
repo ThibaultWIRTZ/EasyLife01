@@ -62,5 +62,7 @@
     <string name="inFav">★</string>
     <string name="logStc">Enter your login details or Create a new account</string>
     <string name="dir">Direction</string>
+    <string name="del">❌</string>
+    <string name="store">⇩</string>
 
 </resources>

@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class Detailsscr extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
-    private String curID, curItem, curCat, curType;
+    private String curID, curItem, curCat, curType, address;
     private boolean b = false;
     private TextView lblDescr, lblTitlePlace, lblPrice, lblSched, lblAddress;
     private DatabaseReference itemRef;
@@ -65,57 +65,67 @@ public class Detailsscr extends AppCompatActivity {
 
         itemRef = FirebaseDatabase.getInstance().getReferenceFromUrl(curItem);
 
-        itemRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(itemRef.getParent().getKey().equals("University")){
-                    String s = dataSnapshot.getKey();
-                    s = s.replace("%20"," ");
-                    lblTitlePlace.setText(s);
-                    lblDescr.setText(dataSnapshot.child("Descr").getValue(String.class));
-                    lblAddress.setText(dataSnapshot.child("Address").getValue(String.class));
+
+        if(itemRef.getParent().getKey().equals("University")){
+            String s = itemRef.getKey();
+            s = s.replace("%20"," ");
+
+            mDataBase.child("Places").child("University").child(s).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot name) {
+                    lblTitlePlace.setText(name.getKey());
+                    address = name.child("Address").getValue(String.class);
+                    lblAddress.setText(address);
+                    lblDescr.setText(name.child("Descr").getValue(String.class));
                     lblPrice.setVisibility(View.GONE);
                     lblSched.setVisibility(View.GONE);
                 }
-                else{
-                    if(!itemRef.getParent().getParent().getKey().equals("Shops")){
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        else {
+            itemRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (!itemRef.getParent().getParent().getKey().equals("Shops")) {
                         String price = "Approx. price : " + dataSnapshot.child("Prices").child("min").getValue(String.class) + " - " + dataSnapshot.child("Prices").child("max").getValue(String.class) + "€";
                         lblPrice.setText(price);
-                    }
-                    else{
+                    } else {
                         lblPrice.setVisibility(View.GONE);
                     }
                     //Go through the element schedule
-                    String sched="";
-                    for (int i=0 ; i<7 ; i++){
-                        if(dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class).equals("closed")){
-                            sched+=lstDay[i] + " : " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class);
+                    String sched = "";
+                    for (int i = 0; i < 7; i++) {
+                        if (dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class).equals("closed")) {
+                            sched += lstDay[i] + " : " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class);
+                        } else {
+                            sched += lstDay[i] + " : " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class) + " - " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Close").getValue(String.class);
                         }
-                        else{
-                            sched+=lstDay[i] + " : " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Open").getValue(String.class) + " - " + dataSnapshot.child("Sched").child(String.valueOf(i)).child("Close").getValue(String.class);
-                        }
-                        if(i!=6){
-                            sched+="\n";
+                        if (i != 6) {
+                            sched += "\n";
                         }
                     }
                     imgPlace.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
                     String s = dataSnapshot.child("PicUrl").getValue(String.class);
-                        Picasso.with(Detailsscr.this).load(s).placeholder(R.mipmap.ic_launcher)
-                                .error(R.mipmap.ic_launcher)
-                                .into(imgPlace, new com.squareup.picasso.Callback() {
-                                    @Override
-                                    public void onSuccess() {
+                    Picasso.with(Detailsscr.this).load(s).placeholder(R.mipmap.ic_launcher)
+                            .error(R.mipmap.ic_launcher)
+                            .into(imgPlace, new com.squareup.picasso.Callback() {
+                                @Override
+                                public void onSuccess() {
 
-                                    }
+                                }
 
-                                    @Override
-                                    public void onError() {
+                                @Override
+                                public void onError() {
 
-                                    }
-                                });
-
-
+                                }
+                            });
 
 
                     lblSched.setText(sched);
@@ -123,14 +133,14 @@ public class Detailsscr extends AppCompatActivity {
                     lblTitlePlace.setText(dataSnapshot.child("Name").getValue(String.class));
                     lblDescr.setText(dataSnapshot.child("Descr").getValue(String.class));
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
+                }
 
-        });
+            });
+        }
 
         isFav();
         ActionBar ab = getSupportActionBar();
@@ -217,20 +227,25 @@ public class Detailsscr extends AppCompatActivity {
     }
 
     public void onClickDirection(View view) {
-        itemRef.child("Address").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String address = dataSnapshot.getValue(String.class);
-                Intent map = new Intent(Detailsscr.this,MapsActivity.class);
-                map.putExtra("ad",address);
-                Log.d("ad",address);
-                startActivity(map);
-            }
+        if(itemRef.getParent().getKey().equals("University")){
+            Intent map = new Intent(Detailsscr.this,MapsActivity.class);
+            map.putExtra("ad",address);
+            startActivity(map);
+        }
+        else{
+            itemRef.child("Address").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ad) {
+                    Intent map = new Intent(Detailsscr.this,MapsActivity.class);
+                    map.putExtra("ad",ad.getValue(String.class));
+                    startActivity(map);
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 }

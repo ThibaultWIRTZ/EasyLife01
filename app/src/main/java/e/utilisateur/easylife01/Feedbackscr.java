@@ -39,7 +39,7 @@ public class Feedbackscr extends AppCompatActivity {
     }
 
     public void onClickBtnSend(View view){
-        mDataBase.child("FeedBacks").addValueEventListener(new ValueEventListener() {
+        mDataBase.child("FeedBacks").child("New").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -61,7 +61,7 @@ public class Feedbackscr extends AppCompatActivity {
 
         s = String.valueOf(maxNb+1);
         //Add feedback to table
-        fRef = mDataBase.child("FeedBacks").child(s);
+        fRef = mDataBase.child("FeedBacks").child("New").child(s);
         txtFB = edtFB.getText().toString();
         fRef.child("txt").setValue(txtFB);
         fRef.child("user").setValue(mAuth.getCurrentUser().getUid());

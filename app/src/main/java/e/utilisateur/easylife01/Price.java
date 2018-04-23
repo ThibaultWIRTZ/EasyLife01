@@ -52,7 +52,7 @@ public class Price  extends AppCompatActivity {
         spinPrice = findViewById(R.id.spinPrice);
         typefood = (String)getIntent().getSerializableExtra("typefood");
         Cat = getIntent().getStringExtra("categ");
-        Toast.makeText(this,typefood,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,typefood,Toast.LENGTH_LONG).show();
 
 
         refreshVue();

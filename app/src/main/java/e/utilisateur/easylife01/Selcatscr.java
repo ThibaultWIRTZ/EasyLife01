@@ -55,13 +55,25 @@ public class Selcatscr extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String v = dataSnapshot.child("Name").getValue(String.class);
                 setTitle(v);
-                String s = dataSnapshot.child("isAdmin").getValue(String.class);
-                if (s.equals("yes")){
-                    admin=true;
+                try{
+                    String tempAd = getIntent().getStringExtra("admin");
+
+                    if(tempAd.equals("no")){
+                        admin = false;
+                    }
+                    else{
+                        admin = true;
+                    }
                 }
-                else{
-                    admin=false;
+                catch(Exception e){
+                    if(dataSnapshot.child("isAdmin").getValue(String.class).equals("yes")){
+                        admin=true;
+                    }
+                    else{
+                        admin=false;
+                    }
                 }
+
                 mProgress.dismiss();
             }
 
@@ -103,7 +115,7 @@ public class Selcatscr extends AppCompatActivity {
                     return true;
 
                 case R.id.action_watchfeedbacks:
-                    Intent intent02 = new Intent(this,Feedbackscr.class);
+                    Intent intent02 = new Intent(this,LstFbscr.class);
                     startActivity(intent02);
                     return true;
 

@@ -20,6 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Utilisateur on 13/03/2018.
@@ -33,6 +38,8 @@ public class Logscr extends AppCompatActivity {
     public static final String TAG = CrtAccscr.class.getSimpleName();
     private static final int ERROR_DIALOG_REQUEST = 9001;
     private ProgressDialog mProgress;
+    private DatabaseReference mDatabase;
+    private String admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +51,11 @@ public class Logscr extends AppCompatActivity {
             edtPassword = findViewById(R.id.edtPswLog);
 
             mAuth = FirebaseAuth.getInstance();
+            mDatabase = FirebaseDatabase.getInstance().getReference();
 
             mProgress = new ProgressDialog(this);
 
-            EditText editText = (EditText) findViewById(R.id.edtLogin);
+            EditText editText = findViewById(R.id.edtLogin);
             editText.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
@@ -131,7 +139,19 @@ public class Logscr extends AppCompatActivity {
     }
 
     public void createLog(){
-        Intent intent = new Intent(this, Selcatscr.class);
-        startActivity(intent);
+        mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot user) {
+                admin = user.child("isAdmin").getValue(String.class);
+                Intent intent = new Intent(Logscr.this, Selcatscr.class);
+                intent.putExtra("admin",admin);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

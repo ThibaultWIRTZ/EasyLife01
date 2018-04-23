@@ -27,9 +27,7 @@ public class Everythingscr extends AppCompatActivity {
     private List<String> lst = new ArrayList<String>();
     private ListView lstAct;
     private String categAct = "University";
-    private List<DatabaseReference> lstRef= new ArrayList<DatabaseReference>();
-    private List<DataSnapshot> lstCat= new ArrayList<DataSnapshot>();
-    private List<DataSnapshot> lstType= new ArrayList<DataSnapshot>();
+    private List<String> lstRef= new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +99,7 @@ public class Everythingscr extends AppCompatActivity {
                 if(categAct.equals("University")){
                     for(DataSnapshot name : dataSnapshot.child(categAct).getChildren()){
                         lst.add(name.getKey());
-                        lstRef.add(name.getRef());
+                        lstRef.add(name.getRef().toString());
                     }
                 }
                 else{
@@ -109,7 +107,7 @@ public class Everythingscr extends AppCompatActivity {
                         for(DataSnapshot id : type.getChildren()){
                             if(Integer.parseInt(id.getKey())>0){
                                 lst.add(id.child("Name").getValue(String.class));
-                                lstRef.add(id.getRef());
+                                lstRef.add(id.getRef().toString());
                             }
                         }
                     }
@@ -128,7 +126,7 @@ public class Everythingscr extends AppCompatActivity {
                                             long arg3)
                     {
                         Intent intent = new Intent(Everythingscr.this, Detailsscr.class);
-                        intent.putExtra("ref",lstRef.get(position).toString());
+                        intent.putExtra("ref",lstRef.get(position));
                         startActivity(intent);
                         // assuming string and if you want to get the value on click of list item
                         // do what you intend to do on click of listview row

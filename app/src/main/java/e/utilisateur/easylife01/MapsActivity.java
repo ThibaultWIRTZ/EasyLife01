@@ -86,7 +86,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
         public void onMapReady (GoogleMap googleMap) {
-            Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "onMapReady: map is ready");
             mMap = googleMap;
 

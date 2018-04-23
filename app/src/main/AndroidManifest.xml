@@ -148,5 +148,21 @@
                 android:value=".Selcatscr" />
         </activity>
 
+        <activity android:name=".LstFbscr"
+            android:label="FeedBacks"
+            android:parentActivityName=".Selcatscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Selcatscr"/>
+        </activity>
+
+        <activity android:name=".WatchFeedBacksscr"
+            android:label="Details"
+            android:parentActivityName=".LstFbscr">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LstFbscr"/>
+        </activity>
+
     </application>
 </manifest>

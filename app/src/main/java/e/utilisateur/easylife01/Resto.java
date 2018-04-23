@@ -102,7 +102,7 @@ public class Resto  extends AppCompatActivity {
                                     int big = Integer.parseInt(id.child("Prices").child("max").getValue(String.class));
                                     if ((low<=min && (min<=big && big<=max))
                                             || ((min<=low && low<=max) && (min<=big && big<=max))
-                                            || ((min<=big && big<=max)&&big>=max)){
+                                            || ((min<=low && low<=max)&&big>=max)){
                                         lstRef.add(id.getRef().toString());
                                         lstR.add(id.child("Name").getValue(String.class));
                                     }
